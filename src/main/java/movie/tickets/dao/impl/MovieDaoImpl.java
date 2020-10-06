@@ -1,6 +1,7 @@
-package movie.tickets.dao;
+package movie.tickets.dao.impl;
 
 import java.util.List;
+import movie.tickets.dao.MovieDao;
 import movie.tickets.exception.DataProcessingException;
 import movie.tickets.lib.Dao;
 import movie.tickets.model.Movie;
