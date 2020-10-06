@@ -15,7 +15,7 @@ public class MovieSession {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private Movie move;
+    private Movie movie;
     @ManyToOne
     private CinemaHall cinemaHall;
     private LocalDateTime showTime;
@@ -28,12 +28,12 @@ public class MovieSession {
         this.id = id;
     }
 
-    public Movie getMove() {
-        return move;
+    public Movie getMovie() {
+        return movie;
     }
 
-    public void setMove(Movie move) {
-        this.move = move;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
     public CinemaHall getCinemaHall() {
@@ -54,7 +54,7 @@ public class MovieSession {
 
     @Override
     public String toString() {
-        return "MovieSession{" + "id=" + id + ", move=" + move
+        return "MovieSession{" + "id=" + id + ", movie=" + movie
                 + ", cinemaHall=" + cinemaHall
                 + ", showTime=" + showTime + '}';
     }
