@@ -1,15 +1,16 @@
 package movie.tickets.dao.impl;
 
+import java.util.Optional;
 import movie.tickets.dao.UserDao;
 import movie.tickets.exception.DataProcessingException;
+import movie.tickets.lib.Dao;
 import movie.tickets.model.User;
 import movie.tickets.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import java.util.Optional;
-
+@Dao
 public class UserDaoImpl implements UserDao {
     @Override
     public User add(User user) {
