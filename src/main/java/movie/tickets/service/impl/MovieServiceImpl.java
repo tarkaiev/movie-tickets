@@ -1,10 +1,11 @@
-package movie.tickets.service;
+package movie.tickets.service.impl;
 
 import java.util.List;
 import movie.tickets.dao.MovieDao;
 import movie.tickets.lib.Inject;
 import movie.tickets.lib.Service;
 import movie.tickets.model.Movie;
+import movie.tickets.service.MovieService;
 
 @Service
 public class MovieServiceImpl implements MovieService {

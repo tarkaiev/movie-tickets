@@ -13,8 +13,9 @@
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="show_sql">true</property>
         <property name="hbm2ddl.auto">create-drop</property>
-
         <mapping class="movie.tickets.model.Movie"/>
+        <mapping class="movie.tickets.model.MovieSession"/>
+        <mapping class="movie.tickets.model.CinemaHall"/>
     </session-factory>
 
 </hibernate-configuration>
