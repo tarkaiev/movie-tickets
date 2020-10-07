@@ -15,9 +15,7 @@ public class HashUtil {
     }
 
     public static String hashPassword(String password, byte[] salt) {
-
         StringBuilder hashedPassword = new StringBuilder();
-
         try {
             MessageDigest messageDigest = MessageDigest.getInstance(ALGORITHM);
             messageDigest.update(salt);
