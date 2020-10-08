@@ -7,10 +7,12 @@ import movie.tickets.lib.Injector;
 import movie.tickets.model.CinemaHall;
 import movie.tickets.model.Movie;
 import movie.tickets.model.MovieSession;
+import movie.tickets.model.User;
 import movie.tickets.security.AuthenticationService;
 import movie.tickets.service.CinemaHallService;
 import movie.tickets.service.MovieService;
 import movie.tickets.service.MovieSessionService;
+import movie.tickets.service.ShoppingCartService;
 import movie.tickets.service.UserService;
 
 public class Main {
@@ -62,13 +64,22 @@ public class Main {
                 = (UserService) injector.getInstance(UserService.class);
         AuthenticationService authenticationService
                 = (AuthenticationService) injector.getInstance(AuthenticationService.class);
-        authenticationService.register("user1@gmail.com", "pass");
-        authenticationService.register("user2@gmail.com", "pass");
+        User user1 = authenticationService.register("user1@gmail.com", "pass");
+        User user2 = authenticationService.register("user2@gmail.com", "pass");
         System.out.println(userService.findByEmail("user1@gmail.com").toString());
         try {
             System.out.println(authenticationService.login("user2@gmail.com", "pass").toString());
         } catch (AuthenticationException e) {
             e.getMessage();
         }
+        ShoppingCartService shoppingCartService
+                = (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
+        shoppingCartService.registerNewShoppingCart(user1);
+        shoppingCartService.addSession(movieSession1, user1);
+        shoppingCartService.addSession(movieSession2, user1);
+        System.out.println(shoppingCartService.getByUser(user1));
+        shoppingCartService.clear(shoppingCartService.getByUser(user1));
+        shoppingCartService.addSession(movieSession2, user1);
+        System.out.println(shoppingCartService.getByUser(user1));
     }
 }
