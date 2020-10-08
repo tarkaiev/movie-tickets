@@ -1,32 +1,32 @@
 package movie.tickets.dao.impl;
 
-import java.util.List;
-import movie.tickets.dao.MovieDao;
+import java.util.Optional;
+import movie.tickets.dao.UserDao;
 import movie.tickets.exception.DataProcessingException;
 import movie.tickets.lib.Dao;
-import movie.tickets.model.Movie;
+import movie.tickets.model.User;
 import movie.tickets.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 @Dao
-public class MovieDaoImpl implements MovieDao {
+public class UserDaoImpl implements UserDao {
     @Override
-    public Movie add(Movie movie) {
+    public User add(User user) {
         Transaction transaction = null;
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.save(movie);
+            session.save(user);
             transaction.commit();
-            return movie;
+            return user;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't add movie " + movie, e);
+            throw new DataProcessingException("Can't add new user " + user, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -35,12 +35,11 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public List<Movie> getAll() {
+    public Optional<User> findByEmail(String email) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<Movie> getAllMoviesQuery = session.createQuery("from Movie", Movie.class);
-            return getAllMoviesQuery.getResultList();
-        } catch (Exception e) {
-            throw new DataProcessingException("Can't get all movies", e);
+            Query<User> query = session.createQuery("FROM User WHERE email = :email", User.class);
+            query.setParameter("email", email);
+            return query.uniqueResultOptional();
         }
     }
 }
