@@ -1,6 +1,7 @@
 package movie.tickets.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import movie.tickets.dao.OrderDao;
 import movie.tickets.lib.Inject;
@@ -22,7 +23,7 @@ public class OrderSerivceImpl implements OrderService {
     public Order completeOrder(List<Ticket> tickets, User user) {
         Order order = new Order();
         order.setOrderDate(LocalDateTime.now());
-        order.setTickets(tickets);
+        order.setTickets(new ArrayList<>(tickets));
         order.setUser(user);
         shoppingCartService.clear(shoppingCartService.getByUser(user));
         return orderDao.add(order);
