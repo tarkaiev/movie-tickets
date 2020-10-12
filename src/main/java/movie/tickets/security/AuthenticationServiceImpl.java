@@ -5,6 +5,7 @@ import movie.tickets.exception.AuthenticationException;
 import movie.tickets.lib.Inject;
 import movie.tickets.lib.Service;
 import movie.tickets.model.User;
+import movie.tickets.service.ShoppingCartService;
 import movie.tickets.service.UserService;
 import movie.tickets.util.HashUtil;
 
@@ -12,6 +13,8 @@ import movie.tickets.util.HashUtil;
 public class AuthenticationServiceImpl implements AuthenticationService {
     @Inject
     private UserService userService;
+    @Inject
+    private ShoppingCartService shoppingCartService;
 
     @Override
     public User login(String email, String password) throws AuthenticationException {
@@ -28,6 +31,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
-        return userService.add(user);
+        userService.add(user);
+        shoppingCartService.registerNewShoppingCart(user);
+        return user;
     }
 }
