@@ -7,14 +7,18 @@ import movie.tickets.lib.Dao;
 import movie.tickets.model.Order;
 import movie.tickets.model.User;
 import movie.tickets.util.HibernateUtil;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 @Dao
 public class OrderDaoImpl implements OrderDao {
+    private static Logger logger = Logger.getLogger(OrderDaoImpl.class);
+
     @Override
     public Order add(Order order) {
+        logger.info("Trying to add new order " + order + " to DB");
         Transaction transaction = null;
         Session session = null;
         try {
@@ -22,6 +26,7 @@ public class OrderDaoImpl implements OrderDao {
             transaction = session.beginTransaction();
             session.save(order);
             transaction.commit();
+            logger.info(order + " successfully added to DB");
             return order;
         } catch (Exception e) {
             if (transaction != null) {
@@ -37,6 +42,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<Order> getUsersOrders(User user) {
+        logger.info("Trying to get all orders from user " + user);
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<Order> query = session.createQuery(
                     "SELECT DISTINCT o FROM Order o "

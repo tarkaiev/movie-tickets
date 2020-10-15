@@ -8,14 +8,19 @@ import movie.tickets.exception.DataProcessingException;
 import movie.tickets.lib.Dao;
 import movie.tickets.model.MovieSession;
 import movie.tickets.util.HibernateUtil;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 @Dao
 public class MovieSessionDaoImpl implements MovieSessionDao {
+    private static Logger logger = Logger.getLogger(MovieSessionDaoImpl.class);
+
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
+        logger.info("Trying to find sessions with movie id = " + movieId
+                + " and date " + date);
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<MovieSession> query = session.createQuery(
                     "FROM MovieSession WHERE movie_id = :movieId "
@@ -30,6 +35,7 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
 
     @Override
     public MovieSession add(MovieSession movieSession) {
+        logger.info("Trying to add new movie session " + movieSession + " to DB");
         Transaction transaction = null;
         Session session = null;
         try {
@@ -37,6 +43,7 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
             transaction = session.beginTransaction();
             session.save(movieSession);
             transaction.commit();
+            logger.info(movieSession + " successfully added to DB");
             return movieSession;
         } catch (Exception e) {
             if (transaction != null) {

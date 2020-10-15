@@ -5,13 +5,17 @@ import movie.tickets.exception.DataProcessingException;
 import movie.tickets.lib.Dao;
 import movie.tickets.model.Ticket;
 import movie.tickets.util.HibernateUtil;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 @Dao
 public class TicketDaoImpl implements TicketDao {
+    private static Logger logger = Logger.getLogger(TicketDaoImpl.class);
+
     @Override
     public Ticket add(Ticket ticket) {
+        logger.info("Trying to add new ticket " + ticket + " to DB");
         Transaction transaction = null;
         Session session = null;
         try {
@@ -19,6 +23,7 @@ public class TicketDaoImpl implements TicketDao {
             transaction = session.beginTransaction();
             session.save(ticket);
             transaction.commit();
+            logger.info(ticket + " successfully added to DB");
             return ticket;
         } catch (Exception e) {
             if (transaction != null) {
