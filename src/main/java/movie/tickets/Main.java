@@ -12,6 +12,7 @@ import movie.tickets.security.AuthenticationService;
 import movie.tickets.service.CinemaHallService;
 import movie.tickets.service.MovieService;
 import movie.tickets.service.MovieSessionService;
+import movie.tickets.service.OrderService;
 import movie.tickets.service.ShoppingCartService;
 import movie.tickets.service.UserService;
 
@@ -80,5 +81,10 @@ public class Main {
         shoppingCartService.clear(shoppingCartService.getByUser(user1));
         shoppingCartService.addSession(movieSession2, user1);
         System.out.println(shoppingCartService.getByUser(user1));
+
+        OrderService orderService
+                = (OrderService) injector.getInstance(OrderService.class);
+        orderService.completeOrder(shoppingCartService.getByUser(user1).getTickets(), user1);
+        orderService.getOrderHistory(user1).forEach(System.out::println);
     }
 }
