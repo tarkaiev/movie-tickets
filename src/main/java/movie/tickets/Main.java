@@ -19,7 +19,7 @@ import org.apache.log4j.Logger;
 
 public class Main {
     private static Injector injector = Injector.getInstance("movie.tickets");
-    private static Logger logger = Logger.getLogger(Main.class);
+    private static final Logger logger = Logger.getLogger(Main.class);
 
     public static void main(String[] args) {
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);

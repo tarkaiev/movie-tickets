@@ -13,7 +13,7 @@ import org.hibernate.query.Query;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-    private static Logger logger = Logger.getLogger(MovieDaoImpl.class);
+    private static final Logger logger = Logger.getLogger(MovieDaoImpl.class);
 
     @Override
     public Movie add(Movie movie) {

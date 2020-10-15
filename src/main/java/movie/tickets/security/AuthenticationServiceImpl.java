@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
-    private static Logger logger = Logger.getLogger(AuthenticationServiceImpl.class);
+    private static final Logger logger = Logger.getLogger(AuthenticationServiceImpl.class);
     @Inject
     private UserService userService;
     @Inject
