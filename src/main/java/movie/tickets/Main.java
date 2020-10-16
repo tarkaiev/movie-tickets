@@ -73,7 +73,7 @@ public class Main {
         try {
             logger.info(authenticationService.login("user2@gmail.com", "pass").toString());
         } catch (AuthenticationException e) {
-            e.getMessage();
+            logger.error(e.getMessage());
         }
         ShoppingCartService shoppingCartService
                 = (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
