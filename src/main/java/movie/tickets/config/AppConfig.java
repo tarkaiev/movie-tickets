@@ -15,7 +15,8 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 @ComponentScan(basePackages = {
         "movie.tickets.dao",
         "movie.tickets.service",
-        "movie.tickets.security"
+        "movie.tickets.security",
+        "movie.tickets.model.dto"
 })
 public class AppConfig {
     private final Environment environment;
