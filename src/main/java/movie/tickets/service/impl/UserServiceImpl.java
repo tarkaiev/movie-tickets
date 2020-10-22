@@ -2,16 +2,18 @@ package movie.tickets.service.impl;
 
 import java.util.Optional;
 import movie.tickets.dao.UserDao;
-import movie.tickets.lib.Inject;
-import movie.tickets.lib.Service;
 import movie.tickets.model.User;
 import movie.tickets.service.UserService;
 import movie.tickets.util.HashUtil;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Inject
-    private UserDao userDao;
+    private final UserDao userDao;
+
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Override
     public User add(User user) {

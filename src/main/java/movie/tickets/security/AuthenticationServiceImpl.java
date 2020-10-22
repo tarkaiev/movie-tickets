@@ -2,21 +2,25 @@ package movie.tickets.security;
 
 import java.util.Optional;
 import movie.tickets.exception.AuthenticationException;
-import movie.tickets.lib.Inject;
-import movie.tickets.lib.Service;
 import movie.tickets.model.User;
 import movie.tickets.service.ShoppingCartService;
 import movie.tickets.service.UserService;
 import movie.tickets.util.HashUtil;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
     private static final Logger logger = Logger.getLogger(AuthenticationServiceImpl.class);
-    @Inject
-    private UserService userService;
-    @Inject
-    private ShoppingCartService shoppingCartService;
+
+    private final UserService userService;
+    private final ShoppingCartService shoppingCartService;
+
+    public AuthenticationServiceImpl(UserService userService,
+                                     ShoppingCartService shoppingCartService) {
+        this.userService = userService;
+        this.shoppingCartService = shoppingCartService;
+    }
 
     @Override
     public User login(String email, String password) throws AuthenticationException {
