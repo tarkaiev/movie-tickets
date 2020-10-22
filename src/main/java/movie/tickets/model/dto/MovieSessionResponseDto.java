@@ -1,8 +1,5 @@
 package movie.tickets.model.dto;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class MovieSessionResponseDto {
     private Long movieSessionId;
     private String movieTitle;

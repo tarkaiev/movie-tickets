@@ -1,4 +1,4 @@
-package movie.tickets.controllers;
+package movie.tickets.controller;
 
 public class AuthenticationController {
 }
