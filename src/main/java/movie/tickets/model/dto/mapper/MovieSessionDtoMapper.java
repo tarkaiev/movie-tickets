@@ -1,7 +1,9 @@
 package movie.tickets.model.dto.mapper;
 
+import java.time.LocalDateTime;
 import movie.tickets.model.MovieSession;
 import movie.tickets.model.dto.MovieSessionRequestDto;
+import movie.tickets.model.dto.MovieSessionResponseDto;
 import movie.tickets.service.CinemaHallService;
 import movie.tickets.service.MovieService;
 import org.springframework.stereotype.Component;
@@ -16,9 +18,19 @@ public class MovieSessionDtoMapper {
         this.cinemaHallService = cinemaHallService;
     }
 
-    private MovieSession movieSessionFromRequestDto(MovieSessionRequestDto dto) {
+    public MovieSession fromRequestDto(MovieSessionRequestDto dto) {
         MovieSession session = new MovieSession();
-
+        session.setMovie(movieService.get(dto.getMovieId()));
+        session.setCinemaHall(cinemaHallService.get(dto.getCinemaHallId()));
+        session.setShowTime(LocalDateTime.parse(dto.getMovieSessionDate()));
         return session;
+    }
+
+    public MovieSessionResponseDto toResponse(MovieSession session) {
+        MovieSessionResponseDto dto = new MovieSessionResponseDto();
+        dto.setMovieTitle(session.getMovie().getTitle());
+        dto.setMovieSessionId(session.getId());
+        dto.setMovieSessionDate(session.getShowTime().toString());
+        return dto;
     }
 }
