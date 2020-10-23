@@ -2,6 +2,7 @@ package movie.tickets.model.dto;
 
 public class MovieSessionResponseDto {
     private Long movieSessionId;
+    private Long cinemaHallId;
     private String movieTitle;
     private String movieSessionDate;
 
@@ -27,5 +28,13 @@ public class MovieSessionResponseDto {
 
     public void setMovieSessionDate(String movieSessionDate) {
         this.movieSessionDate = movieSessionDate;
+    }
+
+    public Long getCinemaHallId() {
+        return cinemaHallId;
+    }
+
+    public void setCinemaHallId(Long cinemaHallId) {
+        this.cinemaHallId = cinemaHallId;
     }
 }

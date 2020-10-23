@@ -61,10 +61,7 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
     public CinemaHall get(Long cinemaHallId) {
         logger.info("Trying to get cinema hall with id " + cinemaHallId);
         try (Session session = sessionFactory.openSession()) {
-            Query<CinemaHall> query
-                    = session.createQuery("from CinemaHall where id = : id", CinemaHall.class);
-            query.setParameter("id", cinemaHallId);
-            return query.getSingleResult();
+            return session.get(CinemaHall.class, cinemaHallId);
         }
     }
 }

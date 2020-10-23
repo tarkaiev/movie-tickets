@@ -1,4 +1,4 @@
-package movie.tickets.model.dto.mapper;
+package movie.tickets.service.mapper;
 
 import java.time.LocalDateTime;
 import movie.tickets.model.MovieSession;
@@ -29,6 +29,7 @@ public class MovieSessionDtoMapper {
     public MovieSessionResponseDto toResponse(MovieSession session) {
         MovieSessionResponseDto dto = new MovieSessionResponseDto();
         dto.setMovieTitle(session.getMovie().getTitle());
+        dto.setCinemaHallId(session.getCinemaHall().getId());
         dto.setMovieSessionId(session.getId());
         dto.setMovieSessionDate(session.getShowTime().toString());
         return dto;

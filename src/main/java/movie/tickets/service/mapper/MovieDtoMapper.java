@@ -1,4 +1,4 @@
-package movie.tickets.model.dto.mapper;
+package movie.tickets.service.mapper;
 
 import movie.tickets.model.Movie;
 import movie.tickets.model.dto.MovieRequestDto;
@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MovieDtoMapper {
-
     public Movie fromRequestDto(MovieRequestDto dto) {
         Movie movie = new Movie();
         movie.setTitle(dto.getTitle());
