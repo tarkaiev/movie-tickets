@@ -1,6 +1,5 @@
 package movie.tickets.service.impl;
 
-import java.util.Optional;
 import movie.tickets.dao.UserDao;
 import movie.tickets.model.User;
 import movie.tickets.service.UserService;
@@ -23,7 +22,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findByEmail(String email) {
-        return userDao.findByEmail(email);
+    public User findByEmail(String email) {
+        return userDao.findByEmail(email).get();
     }
 }
