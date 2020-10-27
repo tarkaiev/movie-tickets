@@ -42,7 +42,7 @@ public class OrderController {
     }
 
     @GetMapping
-    public List<OrderResponseDto> orderHistory(@RequestParam String email) {
+    public List<OrderResponseDto> getOrderHistory(@RequestParam String email) {
         return orderService.getOrderHistory(userService.findByEmail(email)).stream()
                 .map(orderMapper::toOrderResponse)
                 .collect(Collectors.toList());

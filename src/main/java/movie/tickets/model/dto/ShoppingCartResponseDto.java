@@ -3,15 +3,15 @@ package movie.tickets.model.dto;
 import java.util.List;
 
 public class ShoppingCartResponseDto {
-    private List<Long> ticketIds;
+    private List<TicketResponseDto> tickets;
     private Long userId;
 
-    public List<Long> getTicketIds() {
-        return ticketIds;
+    public List<TicketResponseDto> getTickets() {
+        return tickets;
     }
 
-    public void setTicketIds(List<Long> ticketIds) {
-        this.ticketIds = ticketIds;
+    public void setTickets(List<TicketResponseDto> tickets) {
+        this.tickets = tickets;
     }
 
     public Long getUserId() {

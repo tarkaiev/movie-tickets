@@ -1,7 +1,7 @@
 package movie.tickets.model.dto;
 
 public class CinemaHallRequestDto {
-    private int capacity;
+    private Integer capacity;
     private String description;
 
     public int getCapacity() {
