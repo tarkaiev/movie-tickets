@@ -1,6 +1,5 @@
 package movie.tickets.security;
 
-import java.util.Optional;
 import movie.tickets.exception.AuthenticationException;
 import movie.tickets.model.User;
 import movie.tickets.service.ShoppingCartService;
@@ -25,13 +24,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public User login(String email, String password) throws AuthenticationException {
         logger.info("User with email " + email + " is trying to login");
-        Optional<User> userFromDb = userService.findByEmail(email);
-        if (userFromDb.isEmpty() || !HashUtil.hashPassword(password, userFromDb.get().getSalt())
-                .equals(userFromDb.get().getPassword())) {
+        User userFromDb = userService.findByEmail(email);
+        if (!HashUtil.hashPassword(password, userFromDb.getSalt())
+                .equals(userFromDb.getPassword())) {
             throw new AuthenticationException("Incorrect login or password");
         }
         logger.info("User with email " + email + " successfully logged in");
-        return userFromDb.get();
+        return userFromDb;
     }
 
     @Override

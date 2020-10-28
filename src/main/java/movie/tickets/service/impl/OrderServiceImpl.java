@@ -12,11 +12,11 @@ import movie.tickets.service.ShoppingCartService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OrderSerivceImpl implements OrderService {
+public class OrderServiceImpl implements OrderService {
     private final OrderDao orderDao;
     private final ShoppingCartService shoppingCartService;
 
-    public OrderSerivceImpl(OrderDao orderDao, ShoppingCartService shoppingCartService) {
+    public OrderServiceImpl(OrderDao orderDao, ShoppingCartService shoppingCartService) {
         this.orderDao = orderDao;
         this.shoppingCartService = shoppingCartService;
     }
