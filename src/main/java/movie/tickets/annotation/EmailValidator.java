@@ -7,8 +7,8 @@ public class EmailValidator implements ConstraintValidator<EmailValidation, Stri
     private static final String EMAIL_PATTERN = "^[A-Za-z0-9+_.-]+@(.+)$";
 
     @Override
-    public boolean isValid(String s, ConstraintValidatorContext
+    public boolean isValid(String inputEmail, ConstraintValidatorContext
             constraintValidatorContext) {
-        return s != null && s.matches(EMAIL_PATTERN);
+        return inputEmail != null && inputEmail.matches(EMAIL_PATTERN);
     }
 }

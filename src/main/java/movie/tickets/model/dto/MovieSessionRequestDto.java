@@ -1,8 +1,14 @@
 package movie.tickets.model.dto;
 
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotNull;
+
 public class MovieSessionRequestDto {
+    @NotNull
     private Long movieId;
+    @NotNull
     private Long cinemaHallId;
+    @FutureOrPresent
     private String movieSessionDate;
 
     public Long getMovieId() {

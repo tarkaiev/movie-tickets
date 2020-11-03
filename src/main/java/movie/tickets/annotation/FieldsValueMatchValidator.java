@@ -3,21 +3,15 @@ package movie.tickets.annotation;
 import java.util.Objects;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import org.springframework.beans.BeanWrapperImpl;
+import movie.tickets.model.dto.UserRequestDto;
 
-public class FieldsValueMatchValidator implements ConstraintValidator<FieldsValueMatch, Object> {
-    private String field;
-    private String fieldMatch;
-
-    public void initialize(FieldsValueMatch constraint) {
-        this.field = constraint.field();
-        this.fieldMatch = constraint.fieldMatch();
-    }
+public class FieldsValueMatchValidator implements
+        ConstraintValidator<FieldsValueMatch, UserRequestDto> {
 
     @Override
-    public boolean isValid(Object value, ConstraintValidatorContext constraintValidatorContext) {
-        Object fieldValue = new BeanWrapperImpl(value).getPropertyValue(field);
-        Object fieldMatchValue = new BeanWrapperImpl(value).getPropertyValue(fieldMatch);
+    public boolean isValid(UserRequestDto dto, ConstraintValidatorContext context) {
+        Object fieldValue = dto.getPassword();
+        Object fieldMatchValue = dto.getRepeatPassword();
         return Objects.equals(fieldValue, fieldMatchValue);
     }
 }
