@@ -1,5 +1,6 @@
 package movie.tickets.controller;
 
+import javax.validation.Valid;
 import movie.tickets.model.MovieSession;
 import movie.tickets.model.ShoppingCart;
 import movie.tickets.model.User;
@@ -44,7 +45,7 @@ public class ShoppingCartController {
 
     @PostMapping("/movie-sessions")
     public void addMovieSession(Authentication auth,
-                                @RequestBody MovieSessionRequestDto dto) {
+                                @RequestBody @Valid MovieSessionRequestDto dto) {
         String userMail = ((UserDetails) auth.getPrincipal()).getUsername();
         User user = userService.findByEmail(userMail);
         MovieSession session = movieSessionDtoMapper.fromRequestDto(dto);

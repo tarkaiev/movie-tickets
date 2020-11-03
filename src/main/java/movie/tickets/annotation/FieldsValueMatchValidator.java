@@ -10,8 +10,8 @@ public class FieldsValueMatchValidator implements
 
     @Override
     public boolean isValid(UserRequestDto dto, ConstraintValidatorContext context) {
-        Object fieldValue = dto.getPassword();
-        Object fieldMatchValue = dto.getRepeatPassword();
+        String fieldValue = dto.getPassword();
+        String fieldMatchValue = dto.getRepeatPassword();
         return Objects.equals(fieldValue, fieldMatchValue);
     }
 }
