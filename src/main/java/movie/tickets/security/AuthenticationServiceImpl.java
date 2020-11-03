@@ -1,10 +1,8 @@
 package movie.tickets.security;
 
-import movie.tickets.exception.AuthenticationException;
 import movie.tickets.model.User;
 import movie.tickets.service.ShoppingCartService;
 import movie.tickets.service.UserService;
-import movie.tickets.util.HashUtil;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
@@ -19,18 +17,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                                      ShoppingCartService shoppingCartService) {
         this.userService = userService;
         this.shoppingCartService = shoppingCartService;
-    }
-
-    @Override
-    public User login(String email, String password) throws AuthenticationException {
-        logger.info("User with email " + email + " is trying to login");
-        User userFromDb = userService.findByEmail(email);
-        if (!HashUtil.hashPassword(password, userFromDb.getSalt())
-                .equals(userFromDb.getPassword())) {
-            throw new AuthenticationException("Incorrect login or password");
-        }
-        logger.info("User with email " + email + " successfully logged in");
-        return userFromDb;
     }
 
     @Override

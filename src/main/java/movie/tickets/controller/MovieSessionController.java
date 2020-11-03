@@ -3,6 +3,7 @@ package movie.tickets.controller;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import movie.tickets.model.dto.MovieSessionRequestDto;
 import movie.tickets.model.dto.MovieSessionResponseDto;
 import movie.tickets.service.MovieSessionService;
@@ -28,7 +29,7 @@ public class MovieSessionController {
     }
 
     @PostMapping
-    public void addMovieSession(@RequestBody MovieSessionRequestDto dto) {
+    public void addMovieSession(@RequestBody @Valid MovieSessionRequestDto dto) {
         movieSessionService.add(movieSessionDtoMapper.fromRequestDto(dto));
     }
 

@@ -2,6 +2,7 @@ package movie.tickets.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import movie.tickets.model.dto.MovieRequestDto;
 import movie.tickets.model.dto.MovieResponseDto;
 import movie.tickets.service.MovieService;
@@ -24,7 +25,7 @@ public class MovieController {
     }
 
     @PostMapping
-    public void addMovie(@RequestBody MovieRequestDto dto) {
+    public void addMovie(@RequestBody @Valid MovieRequestDto dto) {
         movieService.add(movieDtoMapper.fromRequestDto(dto));
     }
 
