@@ -1,6 +1,8 @@
 package movie.tickets.security;
 
+import java.util.Set;
 import movie.tickets.model.User;
+import movie.tickets.service.RoleService;
 import movie.tickets.service.ShoppingCartService;
 import movie.tickets.service.UserService;
 import org.apache.log4j.Logger;
@@ -12,11 +14,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final UserService userService;
     private final ShoppingCartService shoppingCartService;
+    private final RoleService roleService;
 
     public AuthenticationServiceImpl(UserService userService,
-                                     ShoppingCartService shoppingCartService) {
+                                     ShoppingCartService shoppingCartService,
+                                     RoleService roleService) {
         this.userService = userService;
         this.shoppingCartService = shoppingCartService;
+        this.roleService = roleService;
     }
 
     @Override
@@ -25,6 +30,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
+        user.setRoles(Set.of(roleService.getRoleByName("USER")));
         userService.add(user);
         shoppingCartService.registerNewShoppingCart(user);
         logger.info("User with email " + email + " successfully registered");
